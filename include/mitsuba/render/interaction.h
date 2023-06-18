@@ -492,6 +492,9 @@ struct SurfaceInteraction : Interaction<Float_, Spectrum_> {
         // Incident direction in local coordinates
         wi = dr::select(active, to_local(-ray.d), -ray.d);
 
+        // Assign non-hit si.p to ray.o
+        p = dr::select(active, p, ray.o);
+
         duv_dx = duv_dy = dr::zeros<Point2f>();
 
         if (has_flag(ray_flags, RayFlags::BoundaryTest))
